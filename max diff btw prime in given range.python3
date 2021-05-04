@@ -1,0 +1,39 @@
+def checkprime(i):
+    if i==2 or i==3:
+        return True
+    elif i%2==0 or i%3==0:
+        return False
+    for j in range(3,i,2):
+        if i%j==0:
+            return False
+    return True
+
+
+def prime(l,r):
+    arr=[]
+    lower=None
+    higher=None
+    mid=(l+r)//2
+    for i in range(l,mid+1):
+        if checkprime(i):
+            lower=i
+            break
+    
+    for j in range(r,mid,-1):
+        if checkprime(j):
+            higher=j
+            break
+    
+    if lower==None and higher==None:
+        return -1
+    elif lower and higher:
+        return higher-lower
+    else:
+        return 0
+    
+    
+        
+
+for i in range(int(input())):
+    l,r = map(int,input().split())
+    print(prime(l,r))
