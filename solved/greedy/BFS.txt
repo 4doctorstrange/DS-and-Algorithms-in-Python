@@ -1,0 +1,31 @@
+
+def bfs(visited,adj,source,queue):
+  visited.append(source)
+  queue.append(source)
+  
+  while queue:       #till queue is not empty
+    s=queue.pop(0)      #removing from beginning of queue
+    print(s,end=" ")
+    
+    for i in range(v):
+      if i not in visited and adj[s][i]>0:   #if node not in visited and that is node is adjacent to popped node
+        visited.append(i)
+        queue.append(i)       #after the end of for loop we will have all adjacent nodes in queue and process can work repetitevely
+        
+      
+  
+v=4
+adj = [ [0, 1,1,0 ], 
+      [0,0,1,0], 
+      [1,0,0,1], 
+      [0,0,0, 1]] 
+
+visited=[]
+queue=[]
+source=2
+bfs(visited,adj,source,queue)
+
+  
+
+  
+

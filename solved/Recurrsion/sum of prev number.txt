@@ -1,0 +1,12 @@
+def rec(n):
+    if n==0:
+        return arr[n]
+    else:
+        arr[n]= arr[n] + rec(n-1)
+        return arr[n]
+    
+    
+arr = [1,2,3]
+n=len(arr)
+rec(n-1)
+print(arr)

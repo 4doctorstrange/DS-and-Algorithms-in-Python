@@ -1,0 +1,69 @@
+m=99999999
+class Graph:
+  def __init__(self,vertices,adj):
+    self.ver=vertices
+    self.graph = adj
+
+  def printsol(self,dist,src):
+    print()
+    for node in range(self.ver):
+      print("distance from",src,"to",node,"= :",dist[node])
+    
+  def mindistance(self,dist,status):
+    min=m
+    for v in range(self.ver):
+      if dist[v]<min and status[v]==False: #greedily finding min.wt from nodes that are NOT yet included in solution
+        min = dist[v]
+        min_index = v     #holds the index for mindistance node
+
+    return min_index
+
+  def dijkstra(self,src):
+    dist = [m]*self.ver   #holds distance of each node initally set to infinity for evry node
+    dist[src] = 0
+    status = [False]*self.ver   #tells whether node is permanent or not, initially all set to False
+    path={}
+    for c in range(self.ver):
+        
+      u = self.mindistance(dist, status)
+
+      status[u] = True   #making node permanent
+      
+
+      for v in range(self.ver):
+        if self.graph[u][v]>0 and status[v]==False and dist[v]>dist[u] + self.graph[u][v]:
+          dist[v] = dist[u] + self.graph[u][v]
+          
+
+    self.printsol(dist,src)
+
+
+
+  
+
+v=int(input())
+adj=[]
+for i in range(v):
+  tmp=list(map(int,input().split()))
+  adj.append(tmp)
+
+g=Graph(v,adj)
+s=int(input())
+#dest=int(input())
+g.dijkstra(s)
+
+'''
+INput
+9
+0 4 0 0 0 0 0 8 0
+4 0 8 0 0 0 0 11 0
+0 8 0 7 0 4 0 0 2
+0 0 7 0 9 14 0 0 0
+0 0 0 9 0 10 0 0 0
+0 0 4 14 10 0 2 0 0
+0 0 0 0 0 2 0 1 6
+8 11 0 0 0 0 1 0 7
+0 0 2 0 0 0 6 7 0
+0
+
+'''

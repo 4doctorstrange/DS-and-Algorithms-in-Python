@@ -1,0 +1,67 @@
+m=99999999
+class Graph:
+  def __init__(self,vertices,adj):
+    self.ver=vertices
+    self.graph = adj
+    
+    
+  def printsol(self,parent):
+    print("Edge   distance or weight")
+    for node in range(1,self.ver):
+      print(parent[node],"-",node,"  ",self.graph[node][parent[node]])
+      
+    
+  def mindistance(self,dist,status):
+    min=m
+    for v in range(self.ver):
+      if dist[v]<min and status[v]==False: #greedily finding min.wt from nodes that are NOT yet included in solution
+        min = dist[v]
+        min_index = v     #holds the index for mindistance node
+
+    return min_index
+
+  def prims(self):
+    dist = [m]*self.ver   #holds distance of each node initally set to infinity for evry node
+    dist[0] = 0
+    parent = [None]*self.ver
+    parent[0] = 0
+    status = [False]*self.ver   #tells whether node is permanent or not, initially all set to False
+    
+    
+    for c in range(self.ver):
+        
+      u = self.mindistance(dist, status)
+
+      status[u] = True   #making node permanent
+      
+
+      for v in range(self.ver):
+        if self.graph[u][v]>0 and status[v]==False and dist[v]> + self.graph[u][v]:
+          dist[v] = self.graph[u][v]
+          parent[v] = u
+          
+
+    self.printsol(parent)
+
+
+v=int(input())
+adj=[]
+for i in range(v):
+  tmp=list(map(int,input().split()))
+  adj.append(tmp)
+
+g=Graph(v,adj)
+
+
+g.prims()
+
+'''
+5
+0 2 0 6 0
+2 0 3 8 5
+0 3 0 0 7
+6 8 0 0 9
+0 5 7 9 0
+
+'''
+  

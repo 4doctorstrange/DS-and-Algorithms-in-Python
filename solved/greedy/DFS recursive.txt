@@ -1,0 +1,18 @@
+
+def dfs(visited,adj,node):
+  if node not in visited:
+    print(node,end=" ")      #node is printed if it is not in solution
+    visited.add(node)
+    for i in range(v):
+      if adj[node][i]>0:    #if there is path from node to vertex then dfs is function is called recurrsively 
+        dfs(visited,adj,i)
+    
+  
+v=4
+adj = [ [0, 1,1,0 ], 
+      [0,0,1,0], 
+      [1,0,0,1], 
+      [0,0,0, 1]] 
+visited=set()
+source=1
+dfs(visited,adj,source)

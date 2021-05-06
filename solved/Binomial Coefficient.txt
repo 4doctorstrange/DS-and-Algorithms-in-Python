@@ -1,0 +1,18 @@
+# we know nCk = n-1Ck-1 + n-1Ck-2, as n is decreasing we can use recurrsive approach and can optimize it
+cache={}
+def bcf(n,k):
+    if (n,k) in cache:
+        return cache[(n,k)]
+    if k==0 or k==n:   #we know nC0=1 and nCn=1, therefore that is our base condition
+        m = 1
+    else:
+        m= bcf(n-1,k-1) + bcf(n-1,k)
+    cache[(n,k)]=m
+    return m
+
+n=int(input())
+k=int(input())
+if k<=n:
+    print(bcf(n,k))
+else:
+    print("Invalid input")
