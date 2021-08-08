@@ -219,7 +219,7 @@ edge_list = [
 print(shortest_path(edge_list,"w","y"))
 '''
 #######################################################################################################################
-'''ISLAND GRAPH PROBLEM  '''
+'''ISLAND GRAPH PROBLEM  
 """ We are given a grid with water and island positions and have to calculate no. of island"""
 """Solved using connected component problem"""
 
@@ -266,5 +266,48 @@ grid = [
 ]
 
 print(island_count(grid))
+'''
 
+#####################################################################################################################
+""" Minimum ISland"""
+def min_island_size(grid):
+    visited=set()
+    min_size = 9999999
+    for r in range(len(grid)):
+        for c in range(len(grid[0])):
+            size = explore(grid,r,c,visited)
+            if size>0:   #0 is being returned whenenver bound fails or cell has "w" that is it why it must be valid i.e grater than 0
+                min_size = min(min_size,size)
+    return min_size
+
+def explore(grid,r,c,visited):
+    inboundRow= r>=0 and r<len(grid)
+    inboundCol = c>=0 and c<len(grid[0])
+
+    if inboundRow==False or inboundCol==False:
+        return 0
+    if grid[r][c]=="w":
+        return 0
+    if (r,c) in visited:
+        return 0
+    visited.add((r,c))
+    size=1
+    size+= explore(grid,r-1,c,visited)
+    size+= explore(grid,r+1,c,visited)
+    size+= explore(grid,r,c-1,visited)
+    size+= explore(grid,r,c+1,visited)
+
+    return size
+
+
+grid = [
+    ["w","l","w","w","w"],
+    ["w","l","w","w","w"],
+    ["w","w","w","l","w"],
+    ["w","w","l","l","w"],
+    ["l","w","w","l","l"],
+    ["l","l","w","w","w"],
+]
+
+print(min_island_size(grid))
 
